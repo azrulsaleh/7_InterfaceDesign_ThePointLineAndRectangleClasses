@@ -85,10 +85,59 @@ void MainComponent::paint (Graphics& g)
 		//g.fillRect(pointArea);
 
 	//Lines
+		//g.setColour(Colours::orange);
+		//Line<float>line(Point<float>(10, 10),
+		//				Point<float>(50, 50));
+		//g.drawLine(line, 2.0f);
+
+	//Random lines with intersection
 		g.setColour(Colours::orange);
-		Line<float>line(Point<float>(10, 10),
-						Point<float>(50, 50));
-		g.drawLine(line, 2.0f);
+		auto& random = Random::getSystemRandom();
+		Range<int>lineRange(0, getWidth());
+		Array<Line<float>>lines;
+		auto numLines = 10;
+		for (auto i = 0; i < numLines; ++i)
+		{
+			Line<float>line(random.nextInt(lineRange),
+							random.nextInt(lineRange), 
+							random.nextInt(lineRange), 
+							random.nextInt(lineRange));
+			lines.add(line);
+			g.drawLine(line, 2.0f);
+		}
+
+		//g.setColour(Colours::palegreen);
+		//Rectangle<float>pointArea(8, 8);
+		//for (auto lineI : lines)
+		//{
+		//	for (auto lineJ : lines)
+		//	{
+		//		if (lines.indexOf(lineI) != lines.indexOf(lineJ))
+		//		{
+		//			Point<float>intersection;
+		//			if (lineI.intersects(lineJ,intersection))
+		//			{
+		//				pointArea.setCentre(intersection);
+		//				g.fillEllipse(pointArea);
+		//			}
+		//		}
+		//	}
+		//}
+
+		g.setColour(Colours::palegreen);
+		Rectangle<float>pointArea(8, 8);
+		for (auto i = 0; i < lines.size() - 1; ++i)
+		{
+			for (auto j = i + 1; j < lines.size(); ++j)
+			{
+				Point<float>intersection;
+				if (lines[i].intersects(lines[j], intersection))
+				{
+					pointArea.setCentre(intersection);
+					g.fillEllipse(pointArea);
+				}
+			}
+		}
 }
 
 void MainComponent::resized()
