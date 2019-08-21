@@ -24,8 +24,8 @@ void MainComponent::paint (Graphics& g)
     g.fillAll (Colours::darkgrey);
 
 	//Setting values directly
-		g.setColour(Colours::orange);
-		g.fillRect(10, 10, 40, 40);
+		//g.setColour(Colours::orange);
+		//g.fillRect(10, 10, 40, 40);
 
 	//Rectangle
 		//g.setColour(Colours::orange);
@@ -67,21 +67,22 @@ void MainComponent::paint (Graphics& g)
 		//path.addRectangle(area);
 		//g.fillPath(path);
 
-	//g.setColour(Colours::orange);
-	//auto& random = Random::getSystemRandom();
-	//Range<int>rectRange(20, getWidth() / 2);
-	//Rectangle<int>rectArea(	random.nextInt(rectRange), 
-	//						random.nextInt(rectRange),
-	//						random.nextInt(rectRange),
-	//						random.nextInt(rectRange));
-	//g.drawRect(rectArea, 2.0f);
+	//Random square with inner filled square
+		g.setColour(Colours::orange);
+		auto& random = Random::getSystemRandom();
+		Range<int>rectRange(20, getWidth() / 2);
+		Rectangle<int>rectArea(	random.nextInt(rectRange), 
+								random.nextInt(rectRange),
+								random.nextInt(rectRange),
+								random.nextInt(rectRange));
+		g.drawRect(rectArea, 2.0f);
 
-	//Rectangle<int>pointArea(10, 10);
-	//Point<int>point(random.nextInt(Range<int>(0, getWidth())),
-	//				random.nextInt(Range<int>(0, getHeight())));
-	//pointArea.setCentre(point);
-	//g.setColour(rectArea.contains(point) ? Colours::limegreen : Colours::cornflowerblue);
-	//g.fillRect(pointArea);
+		Rectangle<int>pointArea(10, 10);
+		Point<int>point(random.nextInt(Range<int>(0, getWidth())),
+						random.nextInt(Range<int>(0, getHeight())));
+		pointArea.setCentre(point);
+		g.setColour(rectArea.contains(point) ? Colours::limegreen : Colours::cornflowerblue);
+		g.fillRect(pointArea);
 }
 
 void MainComponent::resized()
@@ -91,7 +92,7 @@ void MainComponent::resized()
     // update their positions.
 }
 
-//void MainComponent::mouseDown(const MouseEvent&)
-//{
-//	repaint();
-//}
+void MainComponent::mouseDown(const MouseEvent&)
+{
+	repaint();
+}
