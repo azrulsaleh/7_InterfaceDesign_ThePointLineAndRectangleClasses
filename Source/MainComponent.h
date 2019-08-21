@@ -22,10 +22,11 @@ public:
     MainComponent();
     ~MainComponent();
 
-    //==============================================================================
+	//==============================================================================
     void paint (Graphics&) override;
     void resized() override;
 
+	//void mouseDown(const MouseEvent&) override;
 private:
     //==============================================================================
     // Your private member variables go here...
