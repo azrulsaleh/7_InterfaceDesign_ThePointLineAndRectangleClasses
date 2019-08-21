@@ -68,28 +68,31 @@ void MainComponent::paint (Graphics& g)
 		//g.fillPath(path);
 
 	//Random square with inner filled square
-		g.setColour(Colours::orange);
-		auto& random = Random::getSystemRandom();
-		Range<int>rectRange(20, getWidth() / 2);
-		Rectangle<int>rectArea(	random.nextInt(rectRange), 
-								random.nextInt(rectRange),
-								random.nextInt(rectRange),
-								random.nextInt(rectRange));
-		g.drawRect(rectArea, 2.0f);
+		//g.setColour(Colours::orange);
+		//auto& random = Random::getSystemRandom();
+		//Range<int>rectRange(20, getWidth() / 2);
+		//Rectangle<int>rectArea(	random.nextInt(rectRange), 
+		//						random.nextInt(rectRange),
+		//						random.nextInt(rectRange),
+		//						random.nextInt(rectRange));
+		//g.drawRect(rectArea, 2.0f);
 
-		Rectangle<int>pointArea(10, 10);
-		Point<int>point(random.nextInt(Range<int>(0, getWidth())),
-						random.nextInt(Range<int>(0, getHeight())));
-		pointArea.setCentre(point);
-		g.setColour(rectArea.contains(point) ? Colours::limegreen : Colours::cornflowerblue);
-		g.fillRect(pointArea);
+		//Rectangle<int>pointArea(10, 10);
+		//Point<int>point(random.nextInt(Range<int>(0, getWidth())),
+		//				random.nextInt(Range<int>(0, getHeight())));
+		//pointArea.setCentre(point);
+		//g.setColour(rectArea.contains(point) ? Colours::limegreen : Colours::cornflowerblue);
+		//g.fillRect(pointArea);
+
+	//Lines
+		g.setColour(Colours::orange);
+		Line<float>line(Point<float>(10, 10),
+						Point<float>(50, 50));
+		g.drawLine(line, 2.0f);
 }
 
 void MainComponent::resized()
 {
-    // This is called when the MainComponent is resized.
-    // If you add any child components, this is where you should
-    // update their positions.
 }
 
 void MainComponent::mouseDown(const MouseEvent&)
