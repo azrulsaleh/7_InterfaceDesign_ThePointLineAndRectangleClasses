@@ -91,20 +91,20 @@ void MainComponent::paint (Graphics& g)
 		//g.drawLine(line, 2.0f);
 
 	//Random lines with intersection
-		g.setColour(Colours::orange);
-		auto& random = Random::getSystemRandom();
-		Range<int>lineRange(0, getWidth());
-		Array<Line<float>>lines;
-		auto numLines = 10;
-		for (auto i = 0; i < numLines; ++i)
-		{
-			Line<float>line(random.nextInt(lineRange),
-							random.nextInt(lineRange), 
-							random.nextInt(lineRange), 
-							random.nextInt(lineRange));
-			lines.add(line);
-			g.drawLine(line, 2.0f);
-		}
+        //g.setColour(Colours::orange);
+        //auto& random = Random::getSystemRandom();
+        //Range<int>lineRange(0, getWidth());
+        //Array<Line<float>>lines;
+        //auto numLines = 10;
+        //for (auto i = 0; i < numLines; ++i)
+        //{
+        //    Line<float>line(random.nextInt(lineRange),
+        //                    random.nextInt(lineRange), 
+        //                    random.nextInt(lineRange), 
+        //                    random.nextInt(lineRange));
+        //    lines.add(line);
+        //    g.drawLine(line, 2.0f);
+        //}
 
 		//g.setColour(Colours::palegreen);
 		//Rectangle<float>pointArea(8, 8);
@@ -124,20 +124,58 @@ void MainComponent::paint (Graphics& g)
 		//	}
 		//}
 
-		g.setColour(Colours::palegreen);
-		Rectangle<float>pointArea(8, 8);
-		for (auto i = 0; i < lines.size() - 1; ++i)
-		{
-			for (auto j = i + 1; j < lines.size(); ++j)
-			{
-				Point<float>intersection;
-				if (lines[i].intersects(lines[j], intersection))
-				{
-					pointArea.setCentre(intersection);
-					g.fillEllipse(pointArea);
-				}
-			}
-		}
+        //g.setColour(Colours::palegreen);
+        //Rectangle<float>pointArea(8, 8);
+        //for (auto i = 0; i < lines.size() - 1; ++i)
+        //{
+        //    for (auto j = i + 1; j < lines.size(); ++j)
+        //    {
+        //        Point<float>intersection;
+        //        if (lines[i].intersects(lines[j], intersection))
+        //        {
+        //            pointArea.setCentre(intersection);
+        //            g.fillEllipse(pointArea);
+        //        }
+        //    }
+        //}
+    
+    //Offset same sized rectangles
+        //Rectangle<int>area(10,10,40,40);
+        //auto numSquares = 10;
+        //for (auto i = 0; i < numSquares; ++i) {
+        //    g.setColour(getRandomColour());
+        //    g.fillRect(area);
+        //    area.translate(30,30);
+        //}
+    
+    //Offset varying sized rectangles
+        //Rectangle<int>area(10,10,40,40);
+        //auto& random = Random::getSystemRandom();
+        //auto numSquares = 10;
+        //for (auto i = 0; i < numSquares; ++i) {
+        //    g.setColour(getRandomColour());
+        //    g.fillRect(area);
+        //    //area.translate(area.getWidth(),area.getHeight());
+        //    area += Point<int>(area.getWidth(), area.getHeight());
+        //    area.setSize(random.nextInt(Range<int>(20,40)),
+        //                 random.nextInt(Range<int>(20,40)));
+        //}
+    
+    Rectangle<int>area(10,10,40,40);
+    auto& random = Random::getSystemRandom();
+    Range<int>rectRandomRange(20,40);
+    auto numSquares = 10;
+    for (auto i = 0; i < numSquares; ++i) {
+        g.setColour(getRandomColour());
+        g.drawRect(area,2.0f);
+        g.setColour(getRandomColour());
+        auto nextArea = area + Point<int>(random.nextInt(rectRandomRange),
+                                          random.nextInt(rectRandomRange));
+        g.setColour(getRandomColour());
+        g.fillRect(area.getIntersection(nextArea));
+        area = nextArea;
+    }
+
 }
 
 void MainComponent::resized()
@@ -147,4 +185,12 @@ void MainComponent::resized()
 void MainComponent::mouseDown(const MouseEvent&)
 {
 	repaint();
+}
+
+Colour MainComponent::getRandomColour()
+{
+    auto& random = Random::getSystemRandom();
+    return Colour((uint8)random.nextInt(256),
+                  (uint8)random.nextInt(256),
+                  (uint8)random.nextInt(256));
 }
